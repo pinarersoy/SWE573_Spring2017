@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search</title>
+<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.2/jquery.min.js" type="text/javascript" id="jquery"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+ 
+
+  $(function(){
+    $('#search-term').submit(function(event){
+       event.preventDefault();
+       //getRequest();
+          myFunction();
+
+    });
+  });
+
+  function getRequest(){
+    $.getJSON('https://api.foursquare.com/v2/venues/search?v=20131016&ll=41,29&intent=browse&radius=800&categoryId=4d4b7105d754a06374d81259&client_id=HV1LR0TFKWKI13KU5C404M3CFCFOH0RDV0CZ31LV2OD5UIT5&client_secret=L4F5QSEPO2WBHSTXKAKRI1U32IWUUPD0LSJ0C0V2HZJQMR4X', function(data){
+      var random = data.response.venues[Math.floor(Math.random() * data.response.venues.length)];
+      //showResults();
+      console.log(random);
+      $("#search-results").append('<br>' + random.name);
+      });
+
+  }
+
+    function myFunction(){
+      var myVar = setInterval(function(){getRequest();}, 500);
+      //clearTimeout(myVar);
+      setTimeout(function( ) { clearInterval( myVar); }, 1600);
+  }
+
+  });
+</script>
+     
+</head>
+
+    <body>
+
+        <H1>Food Nearby</H1>
+            <p>Search for food nearby in your city</p>
+
+            <!--This is the area your location gets spit out on the html page-->
+            <p id="demo"></p>
+
+            <form id ="search-term">
+
+            <input type="text" id="query">
+
+            <!--Submit button-->
+            <input id="submit" type="submit"  value="submit">
+
+            <!--Search results div-->
+            <div id="search-results"></div>
+
+            </form>
+    </body>
+</html>
