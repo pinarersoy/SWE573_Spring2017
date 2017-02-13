@@ -9,7 +9,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
  
-
+// Prevent button to be clicked again
   $(function(){
     $('#search-term').submit(function(event){
        event.preventDefault();
@@ -18,7 +18,8 @@
 
     });
   });
-
+  
+// Foursquare API request
   function getRequest(){
     $.getJSON('https://api.foursquare.com/v2/venues/search?v=20131016&ll=41,29&intent=browse&radius=800&categoryId=4d4b7105d754a06374d81259&client_id=HV1LR0TFKWKI13KU5C404M3CFCFOH0RDV0CZ31LV2OD5UIT5&client_secret=L4F5QSEPO2WBHSTXKAKRI1U32IWUUPD0LSJ0C0V2HZJQMR4X', function(data){
       var random = data.response.venues[Math.floor(Math.random() * data.response.venues.length)];
@@ -28,7 +29,7 @@
       });
 
   }
-
+// Show results sequentially, not immediately
     function myFunction(){
       var myVar = setInterval(function(){getRequest();}, 500);
       //clearTimeout(myVar);
